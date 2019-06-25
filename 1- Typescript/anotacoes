@@ -1,0 +1,13 @@
+npm install typescript -g -- para compilar os arquivos typescript
+tsc nomeArquivo.ts -- compilar arquivo
+tsc -w --Ira monitorar arquivos .ts, assim compilando novos arquivos criados (Criando respectivo .js)
+
+tsconfig contem as configurações da compilação, exemplo, onde os arquivos .js seram salvos
+
+//Utilizando bibliotecas .js no typescript ---------
+
+npm init -- para gerar package.json
+
+npm i --save lodash@4.14 -- Baixando lodash
+
+npm i --save-dev @types/lodash@4.14 -- Baixando as definições de tipo para utilizar com typescript

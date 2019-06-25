@@ -1,0 +1,15 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <jad-header></jad-header>
+</div>
+
+<!-- <jad-student name="Luke" [isJedi]="true"></jad-student> // Passando atributos direto
+<jad-student name="Han Solo" [isJedi]="false"></jad-student>
+<jad-student name="Leia" [isJedi]="false"></jad-student> -->
+
+<!-- Diretiva ngFor - percorre um array, e exibe elementos de acordo com a quandide de dados nesse array -->
+<jad-student *ngFor="let student of students"[student]="student"></jad-student> <!-- Passando como propriedades objetos que foram declarados em app.components.ts-->
+
+<jad-student></jad-student>
+
+<router-outlet></router-outlet>

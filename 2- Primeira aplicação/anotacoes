@@ -1,0 +1,28 @@
+// Gerando aplicação no console 
+
+ng new nomeAplicacao --prefix=jad
+
+//Rodando serve
+ng serve
+
+//Descrição de arquivos importantes gerados 
+
+angular.json -- configurações do angular cli, onde pode ser definido quais arquivos de estilo, script são usados, pagina principal, etc... 
+
+style.css -- todos estilos globais
+
+polyfills.ts -- scripts que daram suporte pra funcionalidades novas a browser antigos
+
+index.js -- onde o componentes, scripts e styles seram injetados
+
+main.ts -- responsavel for fazer o bootstrap da aplicação
+
+//Criando componente -------------------------------------
+
+ng generate component nomeDoComponente --spec=false         --spec referente a arquivos de teste
+ou 
+ng g c nomeDoComponente --spec=false 
+
+//Quando for criado o componente na raiz do projeto, ela sera automaticamente criada dentro de src/app
+//Caso queira criar dentro de outra pasta, execute o comando dentro da mesma
+

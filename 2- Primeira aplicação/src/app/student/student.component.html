@@ -1,0 +1,15 @@
+<div *ngIf="student">  <!-- Diretiva ngIf - o elemento aparece apenas se  condição for verdadeira  --> <!-- Caso student seja invalido, dados não seram exibidos-->
+
+  Student: <a href="#" (click)="clicked()">{{student?.name}}</a> <!-- Evento de click chama o metodo clicked-->
+  <div *ngIf="student?.isJedi">
+    Jedi Temple: {{student?.temple}} <button (click)="description.focus()">Focus!</button> <br/> <!-- Quando clicar no botão sera dado foco na textarea-->
+    <textarea #description></textarea> <!-- #description é a referencia para textarea-->
+  </div>
+
+</div>
+<p *ngIf="!student">
+  Sem dados para exibir
+</p>
+
+<!-- As ? são usadas para caso a propriedade seja undfined não gerar erro -->
+  <!-- <div [hidden]="!student.isJedi"></div> --> <!-- Estilo é aplicado se a condição for true-->

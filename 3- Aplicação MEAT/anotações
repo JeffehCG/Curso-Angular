@@ -1,0 +1,3 @@
+npm start ou ng serve - starta o frontend
+
+json-server db.json - starta o backend

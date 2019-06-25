@@ -1,0 +1,6 @@
+Baixar node.js em nodejs.org
+
+Baixando o angular cli - npm install -g @angular/cli
+
+Caso de algum erro de permissão acessar https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+
