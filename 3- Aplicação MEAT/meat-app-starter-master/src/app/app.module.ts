@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core'; //Local ID - esta sendo usado para converter moeda brasileira
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule} from '@angular/forms'; //Modulo de formularios
 
 //Importando modulo de rotas
 import { ROUTES } from './app.routes';
@@ -20,6 +21,11 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 
 import { RestaurantsService } from './restaurants/restaurants.service'; //Importando serviço, para que o angular saiba da existencia dele
 import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.service';
+import { OrderComponent } from './order/order.component';
+import { InputComponent } from './shared/input/input.component';
+import { RadioComponent } from './shared/radio/radio.component';
+import { OrderItemsComponent } from './order/order-items/order-items.component';
+import { OrderService } from './order/order.service';
 
 @NgModule({
   declarations: [
@@ -33,14 +39,19 @@ import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-
     MenuComponent,
     ShoppingCartComponent,
     MenuItemComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    OrderComponent,
+    InputComponent,
+    RadioComponent,
+    OrderItemsComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule, //Import para usar modulo de formularios
     RouterModule.forRoot(ROUTES) //Passando array de rotas importadas, para efetuar a mudança de pagina
   ],
-  providers: [RestaurantsService, ShoppingCartService, {provide: LOCALE_ID, useValue: 'pt-BR'}], //Declarando serviço, para poder ser injetado pelo angular, e para utilizar valores na moeda brasileira
+  providers: [RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}], //Declarando serviço, para poder ser injetado pelo angular, e para utilizar valores na moeda brasileira
   bootstrap: [AppComponent]
 })
 export class AppModule { }

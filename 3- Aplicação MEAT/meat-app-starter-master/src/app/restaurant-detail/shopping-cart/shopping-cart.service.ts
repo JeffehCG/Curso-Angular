@@ -14,9 +14,22 @@ export class ShoppingCartService{
     addItem(item:MenuItem){
         let foundItem = this.items.find((mItem)=> mItem.menuItem.id === item.id) //Metodo que verifica se o item ja esta no carrinho
         if(foundItem){
-            foundItem.quantity = foundItem.quantity + 1 //Aumentando a quantidade
+            this.increaseQty(foundItem) //Aumentando a quantidade
         }else{
             this.items.push(new CartItem(item)) //Adicionando item ao carrinho
+        }
+    }
+
+    //Aumentando quantidade
+    increaseQty(item:CartItem){
+        item.quantity = item.quantity + 1
+    }
+
+    //Diminuindo quantidade
+    decreaseQty(item: CartItem){
+        item.quantity = item.quantity - 1
+        if(item.quantity === 0){
+            this.removeItem(item)
         }
     }
 
