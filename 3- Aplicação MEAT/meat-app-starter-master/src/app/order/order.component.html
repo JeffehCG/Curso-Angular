@@ -9,33 +9,58 @@
       <!--{{form.value | json}}--> <!-- Valores do inputs do formulario-->
 
         <!-- novalidate desativa a validação padrão do formulario -->
-        <form #form= "ngForm" novalidate> <!-- Aplica por padrão a diretiva ngForm (para pegar valor do form , os campos do form etc)-->
+        <!-- <form #form= "ngForm" novalidate> Aplica por padrão a diretiva ngForm (para pegar valor do form , os campos do form etc) -->
+        <form [formGroup] = "orderForm" novalidate> <!-- Defivindo o formulario como formGroup-->
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
                 <i class="fa fa-shopping-cart"></i> Finalize o seu pedido
               </h2>
             </div>
-          </div>                
+          </div>       
+          
+          <div class="row">
+            <div class="col-xs-12 col-sm9">
+              <p class="lead">Seus Dados:</p>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <span class="help-block pull-right has-error-block" *ngIf="orderForm.hasError('emailsNotMatch')"><i class="fa fa-check"></i> Email-s não conferem</span> <!-- --> 
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <mt-input-container errorMessage="Campo obrigatorio e com 5 caracteres" label="Nome">
+                    <input type="text" class="form-control" formControlName="name" placeholder="Nome" autocomplete="off"> <!-- ngModel alteração de duas mãos, minlength tamanho minimo do campo-->
+                </mt-input-container>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <mt-input-container errorMessage="E-mail invalido" label="E-mail">
+                    <input type="text" class="form-control" formControlName="email" autocomplete="off"> <!-- ngModel alteração de duas mãos, minlength tamanho minimo do campo-->
+                </mt-input-container>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <mt-input-container errorMessage="E-mail invalido" label="Confirmação do e-mail">
+                    <input type="text" class="form-control" formControlName="emailConfirmation" placeholder="Confirmação do e-mail" autocomplete="off"> <!-- ngModel alteração de duas mãos, minlength tamanho minimo do campo-->
+                </mt-input-container>
+            </div>
+          </div>
 
-          <div class="row invoice-info">
+          <div class="row">
             <div class="col-xs-12">
               <p class="lead">Endereço de Entrega:</p>
             </div>
             <div class="col-sm-6 col-xs-12">
               <!-- Passando atributos e o input para o componente input-->
               <mt-input-container errorMessage="Campo obrigatorio e com 5 caracteres" label="Endereço">
-                  <input type="text" class="form-control" name="address" required minlength="5" ngModel placeholder="Endereço" autocomplete="off"> <!-- ngModel alteração de duas mãos, minlength tamanho minimo do campo-->
+                  <input type="text" class="form-control" formControlName="address" placeholder="Endereço" autocomplete="off"> <!-- ngModel alteração de duas mãos, minlength tamanho minimo do campo-->
               </mt-input-container>
             </div>
             <div class="col-sm-3 col-xs-6">
               <mt-input-container errorMessage="Obrigatorio e somente numeros" label="Numbero">
-                  <input type="text" class="form-control" name="number" required ngModel placeholder="Número" autocomplete="off" pattern="^[0-9]*$"> <!-- Em pattern você coloca expressões regulares para validar os dados digitados, como por exemplo, validar um cpf, aceitar só numeros etc...-->
+                  <input type="text" class="form-control" formControlName="number" placeholder="Número" autocomplete="off"> <!-- Em pattern você coloca expressões regulares para validar os dados digitados, como por exemplo, validar um cpf, aceitar só numeros etc...-->
               </mt-input-container>
             </div>
             <div class="col-sm-3 col-xs-6">
               <mt-input-container>
-                  <input type="text" class="form-control" name="optionalAddress" ngModel placeholder="Complemento" autocomplete="off">
+                  <input type="text" class="form-control" formControlName="optionalAddress" placeholder="Complemento" autocomplete="off">
               </mt-input-container>
             </div>
             <!-- /.col -->
@@ -63,7 +88,7 @@
               <p class="lead">Formas de Pagamento:</p>
 
                 <div class="form-group">
-                   <mt-radio [options]='paymentOptions' name="paymentOption" ngModel required></mt-radio > <!-- Componente de raio (Passando opções de pagamento-->
+                   <mt-radio [options]='paymentOptions' formControlName="paymentOption"></mt-radio > <!-- Componente de raio (Passando opções de pagamento-->
                 </div>
 
             </div>
@@ -85,8 +110,8 @@
         <div class="row">
           <div class="col-xs-12">
             <!-- Clicando sera enviado o valor do do form (atributos) para o metodo-->
-            <button (click)="checkOrder(form.value)" href="order-summary.html" 
-                    class="btn btn-success pull-right" [disabled]="!form.valid || cartItems().length === 0"> <!-- caso formulario não seja valido, desabilitar-->
+            <button (click)="checkOrder(orderForm.value)" href="order-summary.html" 
+                    class="btn btn-success pull-right" [disabled]="!orderForm.valid || cartItems().length === 0"> <!-- caso formulario não seja valido, desabilitar-->
               <i class="fa fa-credit-card"></i> Concluir Pedido
             </button>
           </div>

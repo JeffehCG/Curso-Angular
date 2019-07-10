@@ -417,6 +417,22 @@
         }
       ],
       "id": 3
+    },
+    {
+      "name": "Jefferson",
+      "email": "a@gmail.com",
+      "emailConfirmation": "a@gmail.com",
+      "address": "rua a",
+      "number": "4342",
+      "optionalAddress": "",
+      "paymentOption": "REF",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "coke.png"
+        }
+      ],
+      "id": 4
     }
   ]
 }

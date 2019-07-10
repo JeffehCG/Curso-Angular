@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core'; //Local ID - esta sendo usado para converter moeda brasileira
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule} from '@angular/forms'; //Modulo de formularios
+import { FormsModule, ReactiveFormsModule} from '@angular/forms'; //Modulos de formularios
 
 //Importando modulo de rotas
 import { ROUTES } from './app.routes';
@@ -55,6 +55,7 @@ import { RatingComponent } from './shared/rating/rating.component';
     BrowserModule,
     HttpModule,
     FormsModule, //Import para usar modulo de formularios
+    ReactiveFormsModule, //Para usar o Formgroup
     RouterModule.forRoot(ROUTES) //Passando array de rotas importadas, para efetuar a mudança de pagina
   ],
   providers: [RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}], //Declarando serviço, para poder ser injetado pelo angular, e para utilizar valores na moeda brasileira
