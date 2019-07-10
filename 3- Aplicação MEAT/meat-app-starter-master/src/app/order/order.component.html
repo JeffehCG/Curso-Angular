@@ -5,8 +5,8 @@
 <section class="content">
   <section class="invoice">
 
-      {{form.valid}} <!-- Exibindo se o formulario é valido, por exemplo (Se um campo for required e ele estiver vazio, o valor é false)-->
-      {{form.value | json}} <!-- Valores do inputs do formulario-->
+      <!--{{form.valid}}--> <!-- Exibindo se o formulario é valido, por exemplo (Se um campo for required e ele estiver vazio, o valor é false)-->
+      <!--{{form.value | json}}--> <!-- Valores do inputs do formulario-->
 
         <!-- novalidate desativa a validação padrão do formulario -->
         <form #form= "ngForm" novalidate> <!-- Aplica por padrão a diretiva ngForm (para pegar valor do form , os campos do form etc)-->
@@ -35,7 +35,7 @@
             </div>
             <div class="col-sm-3 col-xs-6">
               <mt-input-container>
-                  <input type="text" class="form-control" name="optional" ngModel placeholder="Complemento" autocomplete="off">
+                  <input type="text" class="form-control" name="optionalAddress" ngModel placeholder="Complemento" autocomplete="off">
               </mt-input-container>
             </div>
             <!-- /.col -->
@@ -63,7 +63,7 @@
               <p class="lead">Formas de Pagamento:</p>
 
                 <div class="form-group">
-                   <mt-radio [options]='paymentOptions' name="paymentOption" ngModel></mt-radio > <!-- Componente de raio (Passando opções de pagamento-->
+                   <mt-radio [options]='paymentOptions' name="paymentOption" ngModel required></mt-radio > <!-- Componente de raio (Passando opções de pagamento-->
                 </div>
 
             </div>
@@ -71,22 +71,11 @@
             <div class="col-sm-6 col-xs-12">
               <p class="lead">Frete e Total:</p>
 
-              <div class="table-responsive">
-                <table class="table">
-                  <tbody><tr>
-                    <th style="width:50%">Itens:</th>
-                    <td class="text-right">R$ 20,00</td>
-                  </tr>
-                  <tr>
-                    <th>Frete:</th>
-                    <td class="text-right">R$ 8,00</td>
-                  </tr>
-                  <tr>
-                    <th>Total:</th>
-                    <td class="text-right">R$ 28,00</td>
-                  </tr>
-                </tbody></table>
-              </div>
+              <!-- Componente de frete-->
+              <mt-delivery-costs 
+                [delivery]="delivery"
+                [itemsValue]="itemsValues()"></mt-delivery-costs> <!--Passando atributos para o componete-->
+                
             </div>
             <!-- /.col -->
           </div>
@@ -95,7 +84,9 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <button href="order-summary.html" class="btn btn-success pull-right" [disabled]="!form.valid"> <!-- caso formulario não seja valido, desabilitar-->
+            <!-- Clicando sera enviado o valor do do form (atributos) para o metodo-->
+            <button (click)="checkOrder(form.value)" href="order-summary.html" 
+                    class="btn btn-success pull-right" [disabled]="!form.valid || cartItems().length === 0"> <!-- caso formulario não seja valido, desabilitar-->
               <i class="fa fa-credit-card"></i> Concluir Pedido
             </button>
           </div>

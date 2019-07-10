@@ -1,0 +1,12 @@
+<!-- Exibindo cada estrela -->
+<i *ngFor="let r of rates" class="fa"
+    [class.fa-star]="r <= rate" [class.fa-star-o]="r > rate"
+    (click)="setRate(r)"
+    (mouseenter)="setTemporaryRate(r)"
+    (mouseleave)="clearTemporaryRate(r)">
+
+<!-- Quando for clicado na estrela, sera chamado um metodo que ira definir o valor da avaliação como o numero da estrela
+se o valor da estrela for maior que a avaliação sera aplicada a classe (class.fa-star-o) que é uma estrela vazia -->
+
+<!-- (mouseenter) = evento que chama um metodo quando passa o mouse por cima da estrela
+     (mouseleave) = evento que chama um metodo quando tira o mouse de cima -->
