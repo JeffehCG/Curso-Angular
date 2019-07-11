@@ -14,7 +14,7 @@ const ROUTES: Routes =[
 
 @NgModule({
     declarations: [AboutComponent],
-    imports: [RouterModule, RouterModule.forChild(ROUTES)] //Importando as rotas para serem usadas
+    imports: [ RouterModule.forChild(ROUTES)] //Importando as rotas para serem usadas
 })
 export class AboutModule {
 

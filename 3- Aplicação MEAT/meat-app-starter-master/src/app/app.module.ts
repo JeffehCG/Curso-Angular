@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core'; //Local ID - esta sendo usado para converter moeda brasileira
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'; //Modulos de formularios
 
 //Importando modulo de rotas
@@ -17,16 +17,12 @@ import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shopping-cart.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
-
-import { RestaurantsService } from './restaurants/restaurants.service'; //Importando serviço, para que o angular saiba da existencia dele
-import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.service';
-import { OrderComponent } from './order/order.component';
-import { OrderItemsComponent } from './order/order-items/order-items.component';
-import { OrderService } from './order/order.service';
-import { DeliveryCostsComponent } from './order/delivery-costs/delivery-costs.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
+//Modulos
 import { SharedModule } from './shared/shared.module'; //Modulo separado
+//Os providers estão sendo exportado em SharedModule.forRoot(), assim não precisando usar o CoreModule
+// import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +36,6 @@ import { SharedModule } from './shared/shared.module'; //Modulo separado
     ShoppingCartComponent,
     MenuItemComponent,
     ReviewsComponent,
-    OrderComponent,
-    OrderItemsComponent,
-    DeliveryCostsComponent,
     OrderSummaryComponent,
   ],
   imports: [
@@ -50,10 +43,14 @@ import { SharedModule } from './shared/shared.module'; //Modulo separado
     HttpModule,
     FormsModule, //Import para usar modulo de formularios
     ReactiveFormsModule, //Para usar o Formgroup
-    RouterModule.forRoot(ROUTES), //Passando array de rotas importadas, para efetuar a mudança de pagina
-    SharedModule //Importando o modulo separado, para usar os componentes (InputComponent, RadioComponent, RatingComponent)
+    SharedModule.forRoot(), //Importando o modulo separado, para usar os componentes (InputComponent, RadioComponent, RatingComponent)
+    // CoreModule //Modulo de serviços
+    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}), //Passando array de rotas importadas, para efetuar a mudança de pagina
+    //O PreloadAllModules carrega todos os modulos secundarios em segundo plano,
+    //Assim exibindo o modulo principal para o usuario, e por traz carregando os outros,
+    //Evitando lentidando no carregamento
   ],
-  providers: [RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}], //Declarando serviço, para poder ser injetado pelo angular, e para utilizar valores na moeda brasileira
+  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}], //Declarando serviço, para poder ser injetado pelo angular, e para utilizar valores na moeda brasileira
   bootstrap: [AppComponent]
 })
 export class AppModule { }
