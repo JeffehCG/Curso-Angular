@@ -3,6 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core'; //Local ID - esta sendo usa
 import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'; //Modulos de formularios
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 //Importando modulo de rotas
 import { ROUTES } from './app.routes';
@@ -39,6 +40,7 @@ import { SharedModule } from './shared/shared.module'; //Modulo separado
     OrderSummaryComponent,
   ],
   imports: [
+    BrowserAnimationsModule, //Modulo de animação
     BrowserModule,
     HttpModule,
     FormsModule, //Import para usar modulo de formularios

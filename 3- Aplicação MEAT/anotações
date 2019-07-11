@@ -1,3 +1,9 @@
 npm start ou ng serve - starta o frontend
 
 json-server db.json - starta o backend
+
+--Para usar animações é preciso baixar o modulo de animação e suas dependencias
+
+--Baixando Modulo animações
+npm i --save @angular/animations@4.0.0
+npm i --save web-animations-js //Colocar essa dependencia no arquivo polyfills.ts
