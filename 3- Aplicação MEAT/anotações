@@ -9,3 +9,6 @@ npm i --save @angular/animations@4.0.0
 npm i --save web-animations-js //Colocar essa dependencia no arquivo polyfills.ts
 
 ng build --prod - Roda o sistema em produção
+
+--Buildando o sistema defindo a pasta em que sera colocada no servidor
+ng build --prod --bh=/meat/ (/meat/ = caminh ate os arquivos do servidor)

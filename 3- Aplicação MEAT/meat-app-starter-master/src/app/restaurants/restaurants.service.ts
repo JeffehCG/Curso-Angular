@@ -18,9 +18,9 @@ export class RestaurantsService {
 
     constructor(private http:Http){}
 
-    //Metodo para pegar todos restaurantes
-    restaurants(): Observable<Restaurant[]>{ //Metodo que ira retornar os dados dos restaurantes
-        return this.http.get(`${MEAT_API}/restaurants`) //Requisição http
+    //Metodo para pegar todos restaurantes / ou listar o restaurante pela pesquisa
+    restaurants(search?: string): Observable<Restaurant[]>{ //Metodo que ira retornar os dados dos restaurantes
+        return this.http.get(`${MEAT_API}/restaurants`, {params: {q : search}}) //Requisição http // passando parametro para servidor pesquisar (json-serve aceita um parametro generico "g" para pesquisar geral)
           .map(response => response.json()) //Mapeamento do response e convertendo em json
           .catch(ErrorHandler.handleError) //tratamento de erro
     }
