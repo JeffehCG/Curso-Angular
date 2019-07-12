@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'; //Modulos de formularios
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { LocationStrategy, HashLocationStrategy} from '@angular/common'
 
 //Importando modulo de rotas
 import { ROUTES } from './app.routes';
@@ -19,6 +20,7 @@ import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shoppin
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { NotFoundComponent } from './not-found/not-found.component'; 
 
 //Modulos
 import { SharedModule } from './shared/shared.module'; //Modulo separado
@@ -38,6 +40,7 @@ import { SharedModule } from './shared/shared.module'; //Modulo separado
     MenuItemComponent,
     ReviewsComponent,
     OrderSummaryComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserAnimationsModule, //Modulo de animação
@@ -52,7 +55,8 @@ import { SharedModule } from './shared/shared.module'; //Modulo separado
     //Assim exibindo o modulo principal para o usuario, e por traz carregando os outros,
     //Evitando lentidando no carregamento
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}], //Declarando serviço, para poder ser injetado pelo angular, e para utilizar valores na moeda brasileira
+  providers: [{provide: LocationStrategy, useClass:HashLocationStrategy}, //Usando estrategia de hash na navegação, para evitar problema de rota não encontrada no ambiente de produção
+              {provide: LOCALE_ID, useValue: 'pt-BR'}], //Declarando serviço, para poder ser injetado pelo angular, e para utilizar valores na moeda brasileira
   bootstrap: [AppComponent]
 })
 export class AppModule { }

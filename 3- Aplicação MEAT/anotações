@@ -7,3 +7,5 @@ json-server db.json - starta o backend
 --Baixando Modulo animações
 npm i --save @angular/animations@4.0.0
 npm i --save web-animations-js //Colocar essa dependencia no arquivo polyfills.ts
+
+ng build --prod - Roda o sistema em produção
