@@ -473,6 +473,22 @@
         }
       ],
       "id": 6
+    },
+    {
+      "name": "Jefferson",
+      "email": "j@g.com",
+      "emailConfirmation": "j@g.com",
+      "address": "Rua v",
+      "number": "324",
+      "optionalAddress": "t",
+      "paymentOption": "MON",
+      "orderItems": [
+        {
+          "quantity": 2,
+          "menuId": "cup-cake"
+        }
+      ],
+      "id": 7
     }
   ]
 }

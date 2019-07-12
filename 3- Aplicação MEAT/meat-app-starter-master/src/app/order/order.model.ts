@@ -6,7 +6,8 @@ class Order{
         public number: number,
         public optionalAddress: string,
         public paymentOption: string,
-        public orderItems: OrderItem[] = [] //Na compra tera um array de itens
+        public orderItems: OrderItem[] = [], //Na compra tera um array de itens
+        public id?: string
     ){}
 }
 

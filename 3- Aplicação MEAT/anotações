@@ -1,6 +1,6 @@
 npm start ou ng serve - starta o frontend
 
-json-server db.json - starta o backend
+nodemon --watch backend backend/dist/server.js - starta o backend
 
 --Para usar animações é preciso baixar o modulo de animação e suas dependencias
 
@@ -12,3 +12,4 @@ ng build --prod - Roda o sistema em produção
 
 --Buildando o sistema defindo a pasta em que sera colocada no servidor
 ng build --prod --bh=/meat/ (/meat/ = caminh ate os arquivos do servidor)
+

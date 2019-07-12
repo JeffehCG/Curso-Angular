@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core'; //Local ID - esta sendo usado para converter moeda brasileira
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'; //Modulos de formularios
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
@@ -45,7 +45,7 @@ import { SharedModule } from './shared/shared.module'; //Modulo separado
   imports: [
     BrowserAnimationsModule, //Modulo de animação
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule, //Import para usar modulo de formularios
     ReactiveFormsModule, //Para usar o Formgroup
     SharedModule.forRoot(), //Importando o modulo separado, para usar os componentes (InputComponent, RadioComponent, RatingComponent)
