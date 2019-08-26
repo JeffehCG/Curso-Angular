@@ -1,6 +1,7 @@
 npm start ou ng serve - starta o frontend
 
 nodemon --watch backend backend/dist/server.js - starta o backend
+utilizar tsc -w na pasta backend para monitorar as mudanças nos arquivos .ts e converter para .js
 
 --Para usar animações é preciso baixar o modulo de animação e suas dependencias
 

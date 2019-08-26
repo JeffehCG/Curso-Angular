@@ -14,6 +14,7 @@ var User = /** @class */ (function () {
     return User;
 }());
 exports.User = User;
+//Tipando users, onde chave ser string o Objeto User
 exports.users = {
     "juliana@gmail.com": new User('juliana@gmail.com', 'Juliana', 'juliana23'),
     "amanda@gmail.com": new User('amanda@gmail.com', 'Amanda', 'amanda21')
