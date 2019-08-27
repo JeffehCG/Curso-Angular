@@ -23,7 +23,8 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { NotFoundComponent } from './not-found/not-found.component'; 
 
 //Modulos
-import { SharedModule } from './shared/shared.module'; //Modulo separado
+import { SharedModule } from './shared/shared.module';
+import { LoginComponent } from './security/login/login.component'; //Modulo separado
 //Os providers estão sendo exportado em SharedModule.forRoot(), assim não precisando usar o CoreModule
 // import { CoreModule } from './core/core.module';
 
@@ -41,6 +42,7 @@ import { SharedModule } from './shared/shared.module'; //Modulo separado
     ReviewsComponent,
     OrderSummaryComponent,
     NotFoundComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserAnimationsModule, //Modulo de animação

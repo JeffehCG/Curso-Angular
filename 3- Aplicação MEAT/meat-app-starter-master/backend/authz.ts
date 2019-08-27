@@ -13,7 +13,8 @@ export const handleAuthorization = (req: Request, resp: Response, next) => {
         jwt.verify(token, apiConfig.secret, (error, decoded) => {
             //Se o token estiver correto sera chamado o next(), deixando o request passar
             if(decoded){
-                next()
+                //O next é chamado para liberar para proxima requisição , nesse caso seguindo o fluxo para efetuar o pedido do restaurante
+                next() 
             }else{
                 resp.status(403).json({message: 'Não autorizado'})
             }

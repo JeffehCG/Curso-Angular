@@ -19,7 +19,9 @@ server.use(jsonServer.bodyParser) //Pegando o valor do body
 
 //middleware para login
 server.post('/login', handleAuthentication)
+
 //middleware para efetuar a autenficação e autoriazação do token recebido
+//toda requisição que começe com /orders deverar fazer a autentificação primeiro, depois liberara para efetuar o pedido
 server.use('/orders', handleAuthorization)
 
 // Use default router
