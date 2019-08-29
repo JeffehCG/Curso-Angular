@@ -24,7 +24,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 //Modulos
 import { SharedModule } from './shared/shared.module';
-import { LoginComponent } from './security/login/login.component'; //Modulo separado
+import { LoginComponent } from './security/login/login.component';
+import { UserDetailComponent } from './header/user-detail/user-detail.component'; //Modulo separado
 //Os providers estão sendo exportado em SharedModule.forRoot(), assim não precisando usar o CoreModule
 // import { CoreModule } from './core/core.module';
 
@@ -43,6 +44,7 @@ import { LoginComponent } from './security/login/login.component'; //Modulo sepa
     OrderSummaryComponent,
     NotFoundComponent,
     LoginComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserAnimationsModule, //Modulo de animação

@@ -6,6 +6,8 @@ import { Order, OrderItem } from './order.model';
 import {Router} from '@angular/router'
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
+import 'rxjs/add/operator/do'
+
 @Component({
   selector: 'mt-order',
   templateUrl: './order.component.html'
@@ -19,6 +21,8 @@ export class OrderComponent implements OnInit {
   orderForm: FormGroup //Controle do formulario da pagina(value, validação etc)
 
   delivery: number = 8 //Valor do frete
+
+  orderId: string
 
   paymentOptions: RadioOption[] = [ // Opções de pagamento, que não passados para o componente radio
     {label: 'Dinheiro', value:'MON'},
@@ -80,10 +84,18 @@ export class OrderComponent implements OnInit {
     this.orderService.remove(item)
   }
 
+  //Metodo usado pelo CanDeactivate(leave-order.guard.ts) para verificar se o pedido foi finalizado
+  isOrderCompleted(): boolean{
+    return this.orderId !== undefined
+  }
+
   //Metodo para efetuar pagamento
   checkOrder(order: Order){
     order.orderItems = this.cartItems().map((item: CartItem)=> new OrderItem(item.quantity, item.menuItem.id)) //Pegando cada item do carrinho, e transformando em OrdemItem para o pagamento
     this.orderService.checkOrder(order) //Serviço para mandar para o back
+      .do((orderId: string) => {
+        this.orderId = orderId  //Setando o orderId para identificar que o pedido foi concluido
+      })
       .subscribe(
         (orderId: string)=>{
           this.router.navigate(['/order-summary']) //Navegando para pagina de sucesso

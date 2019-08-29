@@ -11,9 +11,14 @@ import { DeliveryCostsComponent } from "./delivery-costs/delivery-costs.componen
 import { SharedModule } from "app/shared/shared.module";
 import { RouterModule, Routes} from "@angular/router"
 
+//Guard
+import { LeaveOrderGuard } from "./leave-order.guard";
+
 //Rotas desse modulo
 const ROUTES: Routes = [
-    {path: '', component: OrderComponent}, //Rota padrão
+    {path: '', component: OrderComponent, //Rota padrão 
+        canDeactivate:[LeaveOrderGuard] //Associando o CanDeactivate na rota para exibir uma mensagem de confirmação caso usuario saia sem salvar o pedido
+    }, 
 ]
 
 @NgModule({

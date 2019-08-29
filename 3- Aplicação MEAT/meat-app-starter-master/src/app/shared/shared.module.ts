@@ -19,6 +19,11 @@ import { OrderService } from 'app/order/order.service';
 import { NotificationService } from "./messages/notification.service";
 import { LoginService } from "app/security/login/login.service";
 import { LoggedInGuard } from "app/security/loggedin.guard";
+import { LeaveOrderGuard } from "app/order/leave-order.guard";
+
+//HtppIntercptor - Intercepta requisições http
+import { HTTP_INTERCEPTORS } from "@angular/common/http"; //Token que deve ser referenciado no intercpt
+import { AuthInterceptor } from "app/security/auth.interceptor";
 
 @NgModule({
     declarations: [InputComponent, RadioComponent, RatingComponent, SnackbarComponent], //Declarando componentes desse modulo
@@ -38,7 +43,10 @@ export class SharedModule{
                 OrderService, 
                 NotificationService,
                 LoginService,
-                LoggedInGuard]
+                LoggedInGuard,
+                LeaveOrderGuard,
+                {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true} //Intercept
+            ]
         }
     }
 }
