@@ -10,7 +10,6 @@ import { Restaurant } from './item-restaurant/restaurant.model';
 import { MenuItem } from 'app/restaurant-detail/menu-item/menu-item.model';
 
 import { MEAT_API } from '../app.api'; //API de conexão com o backend
-import {ErrorHandler} from '../app.error-handler' //Tratamento de erros
 import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Injectable()

@@ -14,3 +14,6 @@ ng build --prod - Roda o sistema em produção
 --Buildando o sistema defindo a pasta em que sera colocada no servidor
 ng build --prod --bh=/meat/ (/meat/ = caminh ate os arquivos do servidor)
 
+--Apos baixar novas versãoes do angular é preciso executar o comando abaixo, para deixar compativel
+ng update @angular/cli
+

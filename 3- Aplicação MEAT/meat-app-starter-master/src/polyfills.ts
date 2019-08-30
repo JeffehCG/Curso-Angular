@@ -19,8 +19,8 @@ import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 
 //Convertendo em valores da moeda brasileira
-import 'intl'
-import 'intl/locale-data/jsonp/pt-BR.js'
+//import 'intl'
+//import 'intl/locale-data/jsonp/pt-BR.js'
 
 //Para animações (Funcionar em browsers sem superte para animações do angular)
 import 'web-animations-js/web-animations.min.js'
