@@ -2,9 +2,7 @@
 import {Injectable} from '@angular/core' //Como sera recebido outro serviço (http) é preciso o injectable
 import {HttpClient, HttpParams} from '@angular/common/http' //Para receber requisição http (Get, Post etc...)
 
-import{Observable} from 'rxjs/Observable' //Metodos da api http retornam observables, então é preciso retorna-lo no metodo 
-import 'rxjs/add/operator/map' //Para mapear o response obtido pelo observable
-import 'rxjs/add/operator/catch' //Tratamento de erros
+import{Observable} from 'rxjs' //Metodos da api http retornam observables, então é preciso retorna-lo no metodo 
 
 import { Restaurant } from './item-restaurant/restaurant.model';
 import { MenuItem } from 'app/restaurant-detail/menu-item/menu-item.model';

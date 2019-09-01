@@ -1,9 +1,9 @@
 //Serviços para efetuar login
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/do'
-import 'rxjs/add/operator/filter'
+
+import { Observable } from "rxjs";
+import { tap, filter} from "rxjs/operators"
 
 import {MEAT_API} from '../../app.api'
 import { User } from "./user.model";
@@ -19,7 +19,9 @@ export class LoginService{
 
         //Pegando a URL da pagina que o usuario esta acessando (Para o usuario ser redirecionada para mesma apos efetuar o login)
         this.router.events
-            .filter(event => event instanceof NavigationEnd)
+            .pipe( //Utilizado para chamar operadores (filter, tap, map etc...)
+                filter(event => event instanceof NavigationEnd)
+            )
             .subscribe((event:NavigationEnd) => this.lastUrl = event.url)
     }
 
@@ -31,7 +33,9 @@ export class LoginService{
     login(email: string, password: string) : Observable<User> {
         return this.http.post<User>(`${MEAT_API}/login`, 
                 {email: email, password: password})
-            .do( user => this.user = user) //Salvando usuario em memoria
+            .pipe(
+                tap( user => this.user = user) //Salvando usuario em memoria
+            )
     }
 
     //Metodo para redirecionar para tela de login

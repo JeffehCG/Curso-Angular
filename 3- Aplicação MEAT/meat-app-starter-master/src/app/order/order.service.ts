@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import {HttpClient} from '@angular/common/http'
-import 'rxjs/add/operator/map'
 import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shopping-cart.service";
 import { CartItem } from "app/restaurant-detail/shopping-cart/cart-item.model";
 import { Order, OrderItem } from "./order.model";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
+import {map} from 'rxjs/operators'
 import { MEAT_API } from "app/app.api";
 
 @Injectable()
@@ -50,7 +50,9 @@ export class OrderService{
         //A adição desse Header esta sendo feita no HttpInterceptor (auth.interceptor.ts) - que interceptar todas requisições http, e trata as mesmas (adicionando ou auterando itens da requisição)
 
         return this.http.post<Order>(`${MEAT_API}/orders`,order)
-                        .map(order => order.id) //Retornando o ID da compra
+            .pipe(//Utilizado para chamar operadores (filter, tap, map etc...)
+                map(order => order.id) //Retornando o ID da compra
+            )
     }
 }
 

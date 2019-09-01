@@ -6,7 +6,7 @@ import { Order, OrderItem } from './order.model';
 import {Router} from '@angular/router'
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 
-import 'rxjs/add/operator/do'
+import {tap} from 'rxjs/operators'
 
 @Component({
   selector: 'mt-order',
@@ -105,9 +105,11 @@ export class OrderComponent implements OnInit {
   checkOrder(order: Order){
     order.orderItems = this.cartItems().map((item: CartItem)=> new OrderItem(item.quantity, item.menuItem.id)) //Pegando cada item do carrinho, e transformando em OrdemItem para o pagamento
     this.orderService.checkOrder(order) //Serviço para mandar para o back
-      .do((orderId: string) => {
-        this.orderId = orderId  //Setando o orderId para identificar que o pedido foi concluido
-      })
+      .pipe(
+        tap((orderId: string) => {
+          this.orderId = orderId  //Setando o orderId para identificar que o pedido foi concluido
+        })
+      )
       .subscribe(
         (orderId: string)=>{
           this.router.navigate(['/order-summary']) //Navegando para pagina de sucesso

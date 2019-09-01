@@ -27,4 +27,5 @@ ng serve --prod - Simula ambiente de produção
 ng serve --port 4201 - altera porta ao rodar angular
 
     "rxjs-compat": "6.0.0" -- Biblioteca javascript para garantir a compatibilidade do Rxjs do angular 4 para o 5 e 6
+    Para fazer essas mudanças do rxjs em vez de utilizar biblioteca de compatibilidade pode se usar o rxjs-tslint para efetuar as mudanças necessarias automaticamente
 

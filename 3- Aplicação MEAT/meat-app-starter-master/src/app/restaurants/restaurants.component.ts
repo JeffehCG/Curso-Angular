@@ -4,13 +4,14 @@ import { RestaurantsService } from './restaurants.service'; //Importando serviç
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
-import 'rxjs/add/operator/switchMap' //Substitui o observable
-import 'rxjs/add/operator/do' //Executa algo antes do subscrib
-import 'rxjs/add/operator/debounceTime' //Coloca um tempo para para que outro observable seja chamado
-import 'rxjs/add/operator/distinctUntilChanged' //Evitando que o mesmo conteudo seja passado varias vezes
-import 'rxjs/add/operator/catch' //tratamento de erro
-import 'rxjs/add/observable/from' //Criar uma string atravez de um array
-import { Observable } from 'rxjs/Observable';
+// from - Criar uma string atravez de um array
+import { Observable, from } from 'rxjs';
+import {switchMap, tap, debounceTime, distinctUntilChanged, catchError} from 'rxjs/operators'
+//switchMap - Substitui o observable
+//tap - Executa algo antes do subscrib
+//debounceTime - Coloca um tempo para para que outro observable seja chamado
+//distinctUntilChanged - Evitando que o mesmo conteudo seja passado varias vezes
+//catchError - tratamento de erro
 
 @Component({
   selector: 'mt-restaurants',
@@ -53,11 +54,16 @@ export class RestaurantsComponent implements OnInit {
     //Filtrando restaurantes
     //valueChanges chama um evento toda vez que o campo é alterado (praticamente um event onChange)
     this.searchControl.valueChanges
-      .debounceTime(500) //Um evento é chamdo apenas 5 segundos depois do outro (evitando que seja feita uma requisição para o back a cada letra digitada)
-      .distinctUntilChanged()//Não deixar que a mesma pesquisa seja feita varias vezes (por exemplo, pesquisar doces, e depois rapidamente apagar e escrever de novo)
-      .switchMap(searchTerm => 
-        this.restaurantsService.restaurants(searchTerm) //switchMap substitui o Observable
-        .catch(error=> Observable.from([]))) //Caso não de erro retornar array vazio
+      .pipe(//Utilizado para chamar operadores (filter, tap, map etc...)
+        debounceTime(500), //Um evento é chamdo apenas 5 segundos depois do outro (evitando que seja feita uma requisição para o back a cada letra digitada)
+        distinctUntilChanged(),//Não deixar que a mesma pesquisa seja feita varias vezes (por exemplo, pesquisar doces, e depois rapidamente apagar e escrever de novo)
+        switchMap(searchTerm => 
+          this.restaurantsService
+            .restaurants(searchTerm) //switchMap substitui o Observable
+            .pipe(
+              catchError(error=> from([]))) //Caso não de erro retornar array vazio
+            )
+      )
       .subscribe(restaurants => this.restaurants = restaurants) //Definindo o restaurants como os restaurantes pesquisados
 
     //Pegando todos restaurantes
