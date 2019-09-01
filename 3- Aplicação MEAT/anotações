@@ -1,6 +1,9 @@
 npm start ou ng serve - starta o frontend
 
+para rodar o backend é preciso baixar o nodemon de maneira global
+npm i -g nodemon
 nodemon --watch backend backend/dist/server.js - starta o backend
+
 utilizar tsc -w na pasta backend para monitorar as mudanças nos arquivos .ts e converter para .js
 
 --Para usar animações é preciso baixar o modulo de animação e suas dependencias
@@ -9,11 +12,19 @@ utilizar tsc -w na pasta backend para monitorar as mudanças nos arquivos .ts e 
 npm i --save @angular/animations@4.0.0
 npm i --save web-animations-js //Colocar essa dependencia no arquivo polyfills.ts
 
-ng build --prod - Roda o sistema em produção
+ng build --prod - Constroi o sistema para produção
+
+ng build --prod --extract-css=false - mantem o css intacto no ambiente de produção, impedindo que ocorra mudanças
 
 --Buildando o sistema defindo a pasta em que sera colocada no servidor
 ng build --prod --bh=/meat/ (/meat/ = caminh ate os arquivos do servidor)
 
 --Apos baixar novas versãoes do angular é preciso executar o comando abaixo, para deixar compativel
 ng update @angular/cli
+
+ng serve --prod - Simula ambiente de produção
+
+ng serve --port 4201 - altera porta ao rodar angular
+
+    "rxjs-compat": "6.0.0" -- Biblioteca javascript para garantir a compatibilidade do Rxjs do angular 4 para o 5 e 6
 

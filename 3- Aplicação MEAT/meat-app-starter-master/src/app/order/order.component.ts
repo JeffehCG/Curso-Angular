@@ -4,7 +4,7 @@ import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/cart-item.model';
 import { Order, OrderItem } from './order.model';
 import {Router} from '@angular/router'
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 
 import 'rxjs/add/operator/do'
 
@@ -35,14 +35,26 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     //Controle de formulario
     this.orderForm = this.formBuilder.group({
-      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]), //Validators é um componente de validação do formGroup
+      //No FormBuilder como padrão, os validadores são executados sempre quando um novo caracter é digitado (Atraves do evento onChange)
+      //Com o FormControl no angular 5 e 6 esse comportamento pode ser alterado, executando por exemplo a execução do validados apenas no submit
+      name: new FormControl('', {
+        validators:[Validators.required, Validators.minLength(5)],
+        updateOn: 'blur' //Executar validador apenas no evento blur (Quando é tirado o foco do input)
+      }),
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]), //Em pattern é passado um regex
-      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]), //Validators é um componente de validação do formGroup
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),
       paymentOption: this.formBuilder.control('', [Validators.required])
     }, {validator: OrderComponent.equalsTo}) //Passando validador personalizado
+
+      //Caso queira alterar o comportamento da execução de todos validators pode declarar o formulario interifo como FormControl (Como o exemplo abaixo)
+      // this.orderForm = new FormControl({
+      //   name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      //   email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]), 
+      //   emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)])
+      // }, {validators: [OrderComponent.equalsTo], updateOn: 'blur'})
   }
 
   //Validação personalizada, confirmação de email

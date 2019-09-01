@@ -6,7 +6,14 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 @Component({
   selector: 'mt-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  animations: [ //Animações
+
+  //Com a nova compilação do angular 5 e 6, ele acaba tirando espaços em brancos , assim algumas vezez quebrando o CSS
+  preserveWhitespaces: true, //Utilizando essa propriedade no modulo desejado esse problema é resolvido
+  //Caso queira ativar esse atributo em todos componentes é preciso adicionar o preserveWhitespaces: true no arquivo main.ts
+  //Ja para o ambiente de produção é preciso adicionar esse atributo em tsconfig.json 
+
+  //Animações
+  animations: [ 
     trigger('row', [
       state('ready', style({opacity: 1})),
       //Adicionando item ao carrinho
