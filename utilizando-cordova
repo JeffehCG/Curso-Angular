@@ -1,0 +1,29 @@
+Baixando o cordova 
+npm i -g cordova
+
+Criando projeto 
+cordova create CordovaMobileApp com.acme.app "CordovaMobileApp"
+
+Adicionando plataforma android etc...
+cordova platform add android
+
+Adicione o seguinte codigo no index.js do projeto angular (no final da tag body)
+  <script>
+    window.addEventListener = function () {
+      (window.EventTarget || Window).prototype.addEventListener.apply(this, arguments);
+    };
+    window.removeEventListener = function () {
+      (window.EventTarget || Window).prototype.removeEventListener.apply(this, arguments);
+    };
+    document.addEventListener = function () {
+      (window.EventTarget || Document).prototype.addEventListener.apply(this, arguments);
+    };
+    document.removeEventListener = function () {
+      (window.EventTarget || Document).prototype.removeEventListener.apply(this, arguments);
+    };
+  </script>
+  <script src="cordova.js"></script>
+
+Adicione o seguinte script no package.json do projeto angular
+    "cordova" : "ng build --base-href . --output-path ../../CordovaMobileApp/www",
+    "cordova-run": "npm run cordova && cd ../../CordovaMobileApp && cordova run android"

@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,8 @@
 
 
   <title>Meat</title>
-  <base href="/"> <!-- Apartir desse caminho sera buscado os arquivos, ou seja, se for colocado em um servidor dentro de uma pasta tem que colocar o resto do caminho -->
+  <base href="/">
+  <!-- Apartir desse caminho sera buscado os arquivos, ou seja, se for colocado em um servidor dentro de uma pasta tem que colocar o resto do caminho -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -17,7 +19,24 @@
 
 <body class="hold-transition skin-red layout-top-nav">
 
-    <mt-app>Loading...</mt-app>
+  <mt-app>Loading...</mt-app>
+
+  <script>
+    window.addEventListener = function () {
+      (window.EventTarget || Window).prototype.addEventListener.apply(this, arguments);
+    };
+    window.removeEventListener = function () {
+      (window.EventTarget || Window).prototype.removeEventListener.apply(this, arguments);
+    };
+    document.addEventListener = function () {
+      (window.EventTarget || Document).prototype.addEventListener.apply(this, arguments);
+    };
+    document.removeEventListener = function () {
+      (window.EventTarget || Document).prototype.removeEventListener.apply(this, arguments);
+    };
+  </script>
+  <script src="cordova.js"></script>
 
 </body>
+
 </html>
